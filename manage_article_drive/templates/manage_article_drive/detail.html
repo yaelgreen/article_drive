@@ -1,0 +1,12 @@
+<H1>Article:</H1>
+ID: {{article.id}}</br>
+Title: {{article.title_text}}</br>
+Summary: {{article.summary_text}}</br>
+Link: {{article.link_text}}</br>
+Image url: {{article.image_url}}</br>
+Tags: 
+{% for tag in article.tags.all %}
+   <i>{{ tag.tag_text }}</i>
+{% endfor %}
+</br>
+State: {{article.state}}</br>

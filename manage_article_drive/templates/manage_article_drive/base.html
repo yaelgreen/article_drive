@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{{ STATIC_URL }}/static/style.css" />
+
+<script type="text/javascript"
+        src="{{ STATIC_URL }} /static/jquery-3.3.1.min.js"></script>
+<!--<script src="{{ STATIC_URL }} /static/jquery-ui-1.12.1/jquery.ui.core.js"></script>-->
+<!--<script src="{{ STATIC_URL }} /static/jquery-ui-1.12.1/jquery.ui.widget.js"></script>-->
+<!--<script src="{{ STATIC_URL }} /static/jquery-ui-1.12.1/jquery.ui.datepicker.js"></script>-->
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+$(function() {
+    $( "#id_start_date" ).datepicker();
+});
+</script>
+
+<script>
+$(function() {
+    $( "#id_end_date" ).datepicker();
+});
+</script>

@@ -1,0 +1,44 @@
+{% if latest_article_list %}
+	<H1>Saved Articels:</br></H1>
+	Check the checkbox if you wish to delete article from final DB
+	<form action="{% url 'manage_article_drive:delete_articles' %}" method="post">
+	    <div dir="RTL">
+	    <table>
+			    {% csrf_token %}
+			    {% for article in latest_article_list %}
+			    <tr>
+			    	<td>
+		    		    <select name="tag_select{{article.id}}" id="tag_select{{article.id}}">
+				    	<option value="">Choose tag</option>
+						{% for tag in tags %}
+							<option value="{{ tag.tag_text }}">{{ tag.tag_text }}</option>
+						{% endfor %}
+						</select>
+			    	</td>
+			    	<td>
+			        	<input type="checkbox" name="select" id="article_checkbox{{article.id}}" value="{{article.id}}"/>
+			        </td>
+			        <td>
+			        	<img src={{article.image_url}} alt="img" class="img-responsive img-rounded" width="100px" height="100px" object-fit="scale-down">
+			        </td>
+			        <td>
+			        	<a style="color: black; text-decoration: none;" href="{% url 'manage_article_drive:detail' article.id %}">
+			        		<p dir="rtl" align="right">
+			        			
+			        			<b>{{ article.title_text }}</b></br>   
+	        					<font size="2">{{article.pub_date}} </font></br> 
+	        					{{ article.summary_text }} </br>
+	        					<a href={{article.link_text}}>link</a>
+	        				</p>
+	        			</a>
+	        		</td>
+	        	</tr>
+			    {% endfor %}
+		 </table>
+		</div>
+	    <input type="submit" value="Delete Articles">
+	    <input type="submit" value="Save tags" formaction="{% url 'manage_article_drive:change_tags' %}">
+	</form>
+{% else %}
+    <p>No saved saved_articles are available.</p>
+{% endif %}

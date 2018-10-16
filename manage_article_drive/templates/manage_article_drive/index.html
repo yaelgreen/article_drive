@@ -1,0 +1,46 @@
+{% include 'manage_article_drive/base.html' %}
+<H2>Welcome to our Article Drive!</H2>
+
+<a href="{% url 'manage_article_drive:new_articles' %}"> All new articles </a></br>
+<a href="{% url 'manage_article_drive:saved_articles' %}"> All saved articles </a></br>
+<form action="{% url 'manage_article_drive:search_by_text' %}" method="post">
+	{% csrf_token %}
+    <label for="search_phrase">Search saved articles by words in title: </label>
+    <input id="search_phrase" type="text" name="search_phrase" value="{{ search_phrase }}">
+    <input type="submit" name="search_phrase_any" value="Any word">
+    <input type="submit" name="search_phrase_exact" value="Exact phrase"></br>
+</form>
+<form action="{% url 'manage_article_drive:search_by_dates' %}" method="post">
+	{% csrf_token %}
+    <label for="search_dates">Search for saved articles between dates: </label>
+    <!-- <input id="search_dates" type="text" name="search_dates" value="{{ search_dates }}"> -->
+    From: <input type="text" name="start_date" id="id_start_date">
+    To: <input type="text" name="end_date" id="id_end_date">
+    <input type="submit" name="search_by_dates" value="go">
+</form>
+<form action="{% url 'manage_article_drive:search_by_tag' %}" method="post">
+    {% csrf_token %}
+    <label for="search_tag">Search saved articles by tag: </label>
+    <!-- <input id="search_tag" type="text" name="search_tag" value="{{ search_tag }}"> -->
+    <select name="tag_select1" id="tag_select1">
+    	<option value="">Choose tag</option>
+		{% for tag in tags %}
+			<option value="{{ tag.tag_text }}">{{ tag.tag_text }}</option>
+		{% endfor %}
+	</select>
+	<select name="tag_select2" id="tag_select2">
+    	<option value="">Choose tag</option>
+		{% for tag in tags %}
+			<option value="{{ tag.tag_text }}">{{ tag.tag_text }}</option>
+		{% endfor %}
+	</select>
+	<select name="tag_select3" id="tag_select3">
+		<option value="">Choose tag</option>
+		{% for tag in tags %}
+			<option value="{{ tag.tag_text }}">{{ tag.tag_text }}</option>
+		{% endfor %}
+	</select>
+    <input type="submit" name="search_by_tag" value="go">
+</form>
+
+<a href="{% url 'manage_article_drive:deleted_articles' %}"> Deleted articles </a></br>

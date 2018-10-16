@@ -1,0 +1,26 @@
+{% if latest_article_list %}
+	<H1>Deleted Articels:</br></H1>
+	Check on the checkbox if you wish to save to final DB
+	<form action="{% url 'manage_article_drive:save_articles' %}" method="post">
+    <ul>
+    {% csrf_token %}
+    {% for article in latest_article_list %}
+        <li>
+		        	<input type="checkbox" name="select" id="article_checkbox{{article.id}}" value="{{article.id}}"/>
+		        	<a style="color: black; text-decoration: none;" href="{% url 'manage_article_drive:detail' article.id %}">
+		        		<p dir="rtl" align="right">
+		        			<img src={{article.image_url}} alt="img" class="img-responsive img-rounded" width="100px" height="100px" object-fit="scale-down">
+		        			<b>{{ article.title_text }}</b></br>   
+        					<font size="2">{{article.pub_date}} </font></br> 
+        					{{ article.summary_text }} </br>
+        					<a href={{article.link_text}}>link</a>
+        				</p>
+        			</a>
+        		</li>
+    {% endfor %}
+    </ul>
+    <input type="submit" value="Save Articles">
+	</form>
+{% else %}
+    <p>No deleted saved_articles are available.</p>
+{% endif %}
