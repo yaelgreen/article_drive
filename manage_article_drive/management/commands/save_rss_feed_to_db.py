@@ -14,8 +14,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         with open(os.path.dirname(os.path.realpath(__file__))+os.sep+"rss_url_list.txt", 'r') as r_f:
-            for url_data in r_f:
-                url_data = re.split(r'\t+', url_data.rstrip())
+            for data in r_f:
+                if not data or data == '\n':
+                    continue
+                url_data = re.split(r'\t+', data.rstrip())
                 raw_data = reader.read(url_data[1])
                 for line in raw_data:
                     link = unquote(line[2])
@@ -24,7 +26,6 @@ class Command(BaseCommand):
                                   link)
                     if m:
                         link = m.group(1)
-                    print(link)
                     try:
                         title, description, image = web_preview(link)
                         if image is None:
